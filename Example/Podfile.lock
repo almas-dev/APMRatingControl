@@ -1,0 +1,14 @@
+PODS:
+  - APMRatingControl (0.1.0)
+
+DEPENDENCIES:
+  - APMRatingControl (from `../`)
+
+EXTERNAL SOURCES:
+  APMRatingControl:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  APMRatingControl: d9784e5bb62bbed0d24fc4909ef7b8d5ddfacc9a
+
+COCOAPODS: 0.39.0
