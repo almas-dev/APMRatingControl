@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  APMRatingControl: d9784e5bb62bbed0d24fc4909ef7b8d5ddfacc9a
+  APMRatingControl: 715a794c889387e630550bfff99196542defbffa
 
 COCOAPODS: 0.39.0

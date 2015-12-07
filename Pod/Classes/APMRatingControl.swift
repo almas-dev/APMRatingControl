@@ -14,50 +14,57 @@ public class APMRatingControl: UIControl {
     override public init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = UIColor.blueColor()
+        backgroundColor = UIColor.clearColor()
     }
 
     override public func drawRect(rect: CGRect) {
-        let starCount = 5
-        let spaceBetweenStar: CGFloat = 10
-        let starColor = UIColor.yellowColor()
-        let starHighlightColor = UIColor.orangeColor()
-        var ratedStarIndex: Int = 3 {
-            didSet{
-                setNeedsDisplay()
-            }
+        let spacing: CGFloat = 5
+        let maximumValue: CGFloat = 5
+        let value: CGFloat = 3.33
+
+        let availableWidth = rect.size.width - (spacing * (maximumValue - 1)) - 2
+        let cellWidth = (availableWidth / maximumValue)
+        let starSide = (cellWidth <= rect.size.height) ? cellWidth : rect.size.height - 2
+        for var idx: CGFloat = 0; idx < maximumValue; idx++ {
+            let center = CGPointMake(cellWidth * idx + cellWidth / 2 + spacing * idx + 1, rect.size.height / 2)
+            let frame = CGRectMake(center.x - starSide / 2, center.y - starSide / 2, starSide, starSide)
+            drawStarShapeWithFrame(frame, tintColor: UIColor.whiteColor(), progress: value - idx)
         }
+    }
 
-        let starSize = rect.width / CGFloat(starCount) - spaceBetweenStar * 2
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(context, rect.width)
-        var xCenter: CGFloat = starSize / 2 + spaceBetweenStar * 1.5
-        let yCenter: CGFloat = rect.height / 2
+    func drawStarShapeWithFrame(frame: CGRect, tintColor: UIColor, progress: CGFloat) {
+        let minX = CGRectGetMinX(frame)
+        let minY = CGRectGetMinY(frame)
+        let width = CGRectGetWidth(frame)
+        let height = CGRectGetHeight(frame)
 
-        let r: CGFloat = starSize / 2.0
-        let flip: CGFloat = -1.0
+        let starShapePath = UIBezierPath()
+        starShapePath.lineJoinStyle = .Round
+        starShapePath.lineWidth = 2
+        starShapePath.moveToPoint(CGPointMake(minX + 0.50000 * width, minY + 0.0000 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.68750 * width, minY + 0.28261 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 1.00000 * width, minY + 0.36957 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.79167 * width, minY + 0.65217 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.81250 * width, minY + 1.00000 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.50000 * width, minY + 0.86957 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.18750 * width, minY + 1.00000 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.20833 * width, minY + 0.65217 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.00000 * width, minY + 0.36957 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.31250 * width, minY + 0.28261 * height))
+        starShapePath.addLineToPoint(CGPointMake(minX + 0.50000 * width, minY + 0.00000 * height))
+        starShapePath.closePath()
 
-        for i in 0...Int(starCount-1) {
+        let rightRectOfStar = CGRectMake(minX + progress * width, minY, width - progress * width, height)
+        let clipPath = UIBezierPath(rect: CGRectInfinite)
+        clipPath.appendPath(UIBezierPath(rect: rightRectOfStar))
+        clipPath.usesEvenOddFillRule = true
+        CGContextSaveGState(UIGraphicsGetCurrentContext())
+        clipPath.addClip()
+        tintColor.setFill()
+        starShapePath.fill()
 
-            if i > ratedStarIndex-1 {
-                CGContextSetFillColorWithColor(context, starColor.CGColor)
-                CGContextSetStrokeColorWithColor(context, starColor.CGColor)
-            }else {
-                CGContextSetFillColorWithColor(context, starHighlightColor.CGColor)
-                CGContextSetStrokeColorWithColor(context, starHighlightColor.CGColor)
-            }
-            let theta: CGFloat = CGFloat(2.0) * CGFloat(M_PI) * (CGFloat(2.0) / CGFloat(5.0)) // 114 degree
-
-            CGContextMoveToPoint(context, xCenter, r*flip+yCenter)
-
-            for k in 0...5 {
-                let x: CGFloat = r * sin(CGFloat(k) * theta)
-                let y: CGFloat = r * cos(CGFloat(k) * theta)
-                CGContextAddLineToPoint(context, x+xCenter, y*flip+yCenter)
-            }
-            xCenter += starSize + spaceBetweenStar * 1.5
-            CGContextClosePath(context)
-            CGContextFillPath(context)
-        }
+        CGContextRestoreGState(UIGraphicsGetCurrentContext())
+        tintColor.setStroke()
+        starShapePath.stroke()
     }
 }
