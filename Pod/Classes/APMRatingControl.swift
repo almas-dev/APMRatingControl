@@ -14,6 +14,8 @@ public class APMRatingControl: UIControl {
     public var maximumValue: UInt = 5
     public var canRate: Bool = false
     public var stepRate: CGFloat = 0
+    public var borderColor: UIColor?
+    public var fillColor: UIColor?
 
     required public init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -79,11 +81,11 @@ public class APMRatingControl: UIControl {
         for var idx: CGFloat = 0; idx < CGFloat(maximumValue); idx++ {
             let center = CGPointMake(cellWidth * idx + cellWidth / 2 + spacing * idx + 1, rect.size.height / 2)
             let frame = CGRectMake(center.x - starSide / 2, center.y - starSide / 2, starSide, starSide)
-            drawStarShapeWithFrame(frame, tintColor: UIColor.whiteColor(), progress: rating - idx)
+            drawStarShapeWithFrame(frame, borderColor: borderColor ?? tintColor, fillColor: fillColor ?? tintColor, progress: rating - idx)
         }
     }
 
-    func drawStarShapeWithFrame(frame: CGRect, tintColor: UIColor, progress: CGFloat) {
+    func drawStarShapeWithFrame(frame: CGRect, borderColor: UIColor, fillColor: UIColor, progress: CGFloat) {
         let minX = CGRectGetMinX(frame)
         let minY = CGRectGetMinY(frame)
         let width = CGRectGetWidth(frame)
@@ -111,11 +113,11 @@ public class APMRatingControl: UIControl {
         clipPath.usesEvenOddFillRule = true
         CGContextSaveGState(UIGraphicsGetCurrentContext())
         clipPath.addClip()
-        tintColor.setFill()
+        fillColor.setFill()
         starShapePath.fill()
 
         CGContextRestoreGState(UIGraphicsGetCurrentContext())
-        tintColor.setStroke()
+        borderColor.setStroke()
         starShapePath.stroke()
     }
 }
