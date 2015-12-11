@@ -16,6 +16,7 @@ public class APMRatingControl: UIControl {
     public var stepRate: CGFloat = 0
     public var borderColor: UIColor?
     public var fillColor: UIColor?
+    var borderWidth: CGFloat = 2
 
     required public init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -73,13 +74,11 @@ public class APMRatingControl: UIControl {
     }
 
     override public func drawRect(rect: CGRect) {
-        let spacing: CGFloat = 5
-
-        let availableWidth = rect.size.width - (spacing * (CGFloat(maximumValue) - 1)) - 2
+        let availableWidth = rect.size.width - borderWidth * 2
         let cellWidth = (availableWidth / CGFloat(maximumValue))
-        let starSide = (cellWidth <= rect.size.height) ? cellWidth : rect.size.height - 2
+        let starSide = (cellWidth <= rect.size.height) ? cellWidth : rect.size.height - borderWidth * 2
         for var idx: CGFloat = 0; idx < CGFloat(maximumValue); idx++ {
-            let center = CGPointMake(cellWidth * idx + cellWidth / 2 + spacing * idx + 1, rect.size.height / 2)
+            let center = CGPointMake(cellWidth * idx + cellWidth / 2 + borderWidth, rect.size.height / 2)
             let frame = CGRectMake(center.x - starSide / 2, center.y - starSide / 2, starSide, starSide)
             drawStarShapeWithFrame(frame, borderColor: borderColor ?? tintColor, fillColor: fillColor ?? tintColor, progress: rating - idx)
         }
@@ -93,7 +92,7 @@ public class APMRatingControl: UIControl {
 
         let starShapePath = UIBezierPath()
         starShapePath.lineJoinStyle = .Round
-        starShapePath.lineWidth = 2
+        starShapePath.lineWidth = borderWidth
         starShapePath.moveToPoint(CGPointMake(minX + 0.50000 * width, minY + 0.0000 * height))
         starShapePath.addLineToPoint(CGPointMake(minX + 0.68750 * width, minY + 0.28261 * height))
         starShapePath.addLineToPoint(CGPointMake(minX + 1.00000 * width, minY + 0.36957 * height))

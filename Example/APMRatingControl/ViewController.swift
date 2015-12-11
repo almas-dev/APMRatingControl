@@ -32,10 +32,11 @@ class ViewController: UIViewController {
 
 
         ratingControl.canRate = true
-        ratingControl.stepRate = 0.5
+        //ratingControl.stepRate = 0.5
         ratingControl.borderColor = UIColor.whiteColor()
         ratingControl.fillColor = UIColor.whiteColor()
         ratingControl.addTarget(self, action: "ratingControlChangeValueAction:", forControlEvents: .ValueChanged)
+        ratingControl.backgroundColor = UIColor.brownColor()
         ratingControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(ratingControl)
         view.addConstraints([
