@@ -14,9 +14,9 @@ public class APMRatingControl: UIControl {
     public var maximumValue: UInt = 5
     public var canRate: Bool = false
     public var stepRate: CGFloat = 0
+    public var borderWidth: CGFloat = 2
     public var borderColor: UIColor?
     public var fillColor: UIColor?
-    var borderWidth: CGFloat = 2
 
     required public init(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -74,12 +74,11 @@ public class APMRatingControl: UIControl {
     }
 
     override public func drawRect(rect: CGRect) {
-        let availableWidth = rect.size.width - borderWidth * 2
-        let cellWidth = (availableWidth / CGFloat(maximumValue))
-        let starSide = (cellWidth <= rect.size.height) ? cellWidth : rect.size.height - borderWidth * 2
+        let starZone = ((rect.size.width - borderWidth * 2) / CGFloat(maximumValue))
+        let starHeight = (starZone <= rect.size.height) ? starZone : rect.size.height - borderWidth * 2
         for var idx: CGFloat = 0; idx < CGFloat(maximumValue); idx++ {
-            let center = CGPointMake(cellWidth * idx + cellWidth / 2 + borderWidth, rect.size.height / 2)
-            let frame = CGRectMake(center.x - starSide / 2, center.y - starSide / 2, starSide, starSide)
+            let center = CGPointMake(starZone * idx + starZone / 2 + borderWidth, rect.size.height / 2)
+            let frame = CGRectMake(center.x - starHeight / 2, center.y - starHeight / 2, starHeight, starHeight)
             drawStarShapeWithFrame(frame, borderColor: borderColor ?? tintColor, fillColor: fillColor ?? tintColor, progress: rating - idx)
         }
     }

@@ -21,6 +21,7 @@ class ViewController: UIViewController {
 
         fixedRating.rating = 3.33
         fixedRating.maximumValue = 8
+        fixedRating.borderWidth = 0.5
         fixedRating.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(fixedRating)
         view.addConstraints([
