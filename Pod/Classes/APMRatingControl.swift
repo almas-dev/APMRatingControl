@@ -76,10 +76,10 @@ public class APMRatingControl: UIControl {
     override public func drawRect(rect: CGRect) {
         let starZone = ((rect.size.width - borderWidth * 2) / CGFloat(maximumValue))
         let starHeight = (starZone <= rect.size.height) ? starZone : rect.size.height - borderWidth * 2
-        for var idx: CGFloat = 0; idx < CGFloat(maximumValue); idx++ {
-            let center = CGPointMake(starZone * idx + starZone / 2 + borderWidth, rect.size.height / 2)
+        for idx in  0 ..< maximumValue {
+            let center = CGPointMake(starZone * CGFloat(idx) + starZone / 2 + borderWidth, rect.size.height / 2)
             let frame = CGRectMake(center.x - starHeight / 2, center.y - starHeight / 2, starHeight, starHeight)
-            drawStarShapeWithFrame(frame, borderColor: borderColor ?? tintColor, fillColor: fillColor ?? tintColor, progress: rating - idx)
+            drawStarShapeWithFrame(frame, borderColor: borderColor ?? tintColor, fillColor: fillColor ?? tintColor, progress: rating - CGFloat(idx))
         }
     }
 
