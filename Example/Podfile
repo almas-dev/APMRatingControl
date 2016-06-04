@@ -1,12 +1,10 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'APMRatingControl_Example', :exclusive => true do
-  pod "APMRatingControl", :path => "../"
-end
 
-target 'APMRatingControl_Tests', :exclusive => true do
+abstract_target 'APMRatingControl' do
   pod "APMRatingControl", :path => "../"
 
-  
+  target 'APMRatingControl_Example'
+  target 'APMRatingControl_Tests'
 end
