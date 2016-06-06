@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         ratingControl.stepRate = 0.5
         ratingControl.borderColor = UIColor.whiteColor()
         ratingControl.fillColor = UIColor.whiteColor()
-        ratingControl.addTarget(self, action: "ratingControlChangeValueAction:", forControlEvents: .ValueChanged)
+        ratingControl.addTarget(self, action: #selector(ViewController.ratingControlChangeValueAction(_:)), forControlEvents: .ValueChanged)
         ratingControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(ratingControl)
         view.addConstraints([
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         floatRatingControl.borderWidth = 1
         floatRatingControl.borderColor = UIColor.whiteColor()
         floatRatingControl.fillColor = UIColor.whiteColor()
-        floatRatingControl.addTarget(self, action: "ratingControlChangeValueAction:", forControlEvents: .ValueChanged)
+        floatRatingControl.addTarget(self, action: #selector(ViewController.ratingControlChangeValueAction(_:)), forControlEvents: .ValueChanged)
         floatRatingControl.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
         floatRatingControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(floatRatingControl)
