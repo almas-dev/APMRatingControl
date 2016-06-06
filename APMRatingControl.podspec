@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.summary          = "Rating control written in Swift"
 
   s.description      = <<-DESC
-   Rating star control view
+   Customisable and lightweight rating star control view
                        DESC
 
   s.homepage         = "https://github.com/almas-dev/APMRatingControl"
@@ -23,7 +23,4 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'APMRatingControl' => ['Pod/Assets/*.png']
-  }
 end
