@@ -4,6 +4,7 @@
 [![Version](https://img.shields.io/cocoapods/v/APMRatingControl.svg?style=flat)](http://cocoapods.org/pods/APMRatingControl)
 [![License](https://img.shields.io/cocoapods/l/APMRatingControl.svg?style=flat)](http://cocoapods.org/pods/APMRatingControl)
 [![Platform](https://img.shields.io/cocoapods/p/APMRatingControl.svg?style=flat)](http://cocoapods.org/pods/APMRatingControl)
+[![codebeat badge](https://codebeat.co/badges/3514eebb-a2db-4796-9aef-3f4bc818b20c)](https://codebeat.co/projects/github-com-almas-dev-apmratingcontrol)
 
 ## Usage
 
