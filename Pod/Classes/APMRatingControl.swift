@@ -84,31 +84,16 @@ public class APMRatingControl: UIControl {
     }
 
     func drawStarShapeWithFrame(frame: CGRect, borderColor: UIColor, fillColor: UIColor, progress: CGFloat) {
-        let minX = CGRectGetMinX(frame)
-        let minY = CGRectGetMinY(frame)
-        let width = CGRectGetWidth(frame)
-        let height = CGRectGetHeight(frame)
+        let starShapePath = starBezierPath(frame, lineWidth: borderWidth)
 
-        let starShapePath = UIBezierPath()
-        starShapePath.lineJoinStyle = .Round
-        starShapePath.lineWidth = borderWidth
-        starShapePath.moveToPoint(CGPointMake(minX + 0.50000 * width, minY + 0.0000 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.68750 * width, minY + 0.28261 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 1.00000 * width, minY + 0.36957 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.79167 * width, minY + 0.65217 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.81250 * width, minY + 1.00000 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.50000 * width, minY + 0.86957 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.18750 * width, minY + 1.00000 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.20833 * width, minY + 0.65217 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.00000 * width, minY + 0.36957 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.31250 * width, minY + 0.28261 * height))
-        starShapePath.addLineToPoint(CGPointMake(minX + 0.50000 * width, minY + 0.00000 * height))
-        starShapePath.closePath()
-
-        let rightRectOfStar = CGRectMake(minX + progress * width, minY, width - progress * width, height)
+        let rightRectOfStar = CGRectMake(frame.minX + progress * frame.width, frame.minY, frame.width - progress * frame.width, frame.height)
         let clipPath = UIBezierPath(rect: CGRectInfinite)
         clipPath.appendPath(UIBezierPath(rect: rightRectOfStar))
         clipPath.usesEvenOddFillRule = true
+        if borderWidth == 0 {
+            borderColor.setFill()
+            starShapePath.fill()
+        }
         CGContextSaveGState(UIGraphicsGetCurrentContext())
         clipPath.addClip()
         fillColor.setFill()
@@ -117,5 +102,26 @@ public class APMRatingControl: UIControl {
         CGContextRestoreGState(UIGraphicsGetCurrentContext())
         borderColor.setStroke()
         starShapePath.stroke()
+    }
+
+    // MARK: - Private methods
+
+    private func starBezierPath(frame: CGRect, lineWidth: CGFloat) -> UIBezierPath {
+        let bezierPath = UIBezierPath()
+        bezierPath.lineJoinStyle = .Round
+        bezierPath.lineWidth = lineWidth
+        bezierPath.moveToPoint(CGPointMake(frame.minX + 0.50000 * frame.width, frame.minY + 0.0000 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.68750 * frame.width, frame.minY + 0.28261 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 1.00000 * frame.width, frame.minY + 0.36957 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.79167 * frame.width, frame.minY + 0.65217 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.81250 * frame.width, frame.minY + 1.00000 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.50000 * frame.width, frame.minY + 0.86957 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.18750 * frame.width, frame.minY + 1.00000 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.20833 * frame.width, frame.minY + 0.65217 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.00000 * frame.width, frame.minY + 0.36957 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.31250 * frame.width, frame.minY + 0.28261 * frame.height))
+        bezierPath.addLineToPoint(CGPointMake(frame.minX + 0.50000 * frame.width, frame.minY + 0.00000 * frame.height))
+        bezierPath.closePath()
+        return bezierPath
     }
 }
