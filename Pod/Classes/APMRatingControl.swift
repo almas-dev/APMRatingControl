@@ -94,12 +94,12 @@ public class APMRatingControl: UIControl {
             borderColor.setFill()
             starShapePath.fill()
         }
-        CGContextSaveGState(UIGraphicsGetCurrentContext())
+        CGContextSaveGState(UIGraphicsGetCurrentContext()!)
         clipPath.addClip()
         fillColor.setFill()
         starShapePath.fill()
 
-        CGContextRestoreGState(UIGraphicsGetCurrentContext())
+        CGContextRestoreGState(UIGraphicsGetCurrentContext()!)
         borderColor.setStroke()
         starShapePath.stroke()
     }
