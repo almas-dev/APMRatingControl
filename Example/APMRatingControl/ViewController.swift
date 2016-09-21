@@ -10,10 +10,10 @@ import UIKit
 import APMRatingControl
 
 class ViewController: UIViewController {
-    let fixedRating = APMRatingControl
-    let ratingControl = APMRatingControl
-    let floatRatingControl = APMRatingControl
-    let twoColorsRatingControl = APMRatingControl
+    let fixedRating = APMRatingControl()
+    let ratingControl = APMRatingControl()
+    let floatRatingControl = APMRatingControl()
+    let twoColorsRatingControl = APMRatingControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
