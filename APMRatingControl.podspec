@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = "APMRatingControl"
-  s.version          = "0.3.1"
-  s.summary          = "Rating control written in Swift"
+  s.version          = "0.4"
+  s.summary          = "Rating control written in Swift 3"
 
   s.description      = <<-DESC
    Customisable and lightweight rating star control view
