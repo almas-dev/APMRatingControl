@@ -1,5 +1,5 @@
 PODS:
-  - APMRatingControl (0.3.1)
+  - APMRatingControl (0.4)
 
 DEPENDENCIES:
   - APMRatingControl (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  APMRatingControl: a2f79443564da2a134f15e4be7e3ea40bbf2208d
+  APMRatingControl: 55935db4f0f7f74ce2b06a3ddb3f477e7a4ec7e0
 
 PODFILE CHECKSUM: 61582a3664b78b87bccb1f1214f3419eec75c4cb
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.2
